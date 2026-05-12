@@ -1,0 +1,45 @@
+{
+  "check_interval": 60,
+  "full_notification": {
+    "urgency": "Low",
+    "enabled": true,
+    "title": "Battery Full",
+    "message": "✓ Battery fully charged - ready to rock"
+  },
+  "notifications": [
+    {
+      "level": 30,
+      "message": "🔋 start looking for an outlet",
+      "title": "Battery Getting Low",
+      "urgency": "Normal"
+    },
+    {
+      "level": 20,
+      "message": "⚠️ find a charger asap",
+      "title": "Battery Low",
+      "urgency": "Normal"
+    },
+    {
+      "level": 15,
+      "message": "🔴 connect charger like now!!",
+      "time_secs": 0,
+      "title": "Battery Critical",
+      "urgency": "Critical"
+    },
+    {
+      "level": 10,
+      "message": "💀 do something!!!",
+      "time_secs": 0,
+      "title": "Battery Very Low",
+      "urgency": "Critical"
+    },
+    {
+      "level": 7,
+      "message": "🚨 totally intentional reset. byeee!!!!",
+      "time_secs": 0,
+      "title": "Battery Emergency",
+      "urgency": "Critical"
+    }
+  ],
+  "show_on_single_battery": true
+}

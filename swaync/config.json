@@ -1,0 +1,88 @@
+{
+    "$schema": "/etc/xdg/swaync/configschema.json",
+    "control-center-width": 350,
+    "cssPriority": "user",
+    "fit-to-screen": true,
+    "hide-on-action": false,
+    "hide-on-clear": false,
+    "image-visibility": "when-available",
+    "keyboard-shortcuts": true,
+    "notification-2fa-action": false,
+    "notification-body-image-height": 500,
+    "notification-body-image-width": 500,
+    "notification-icon-size": 40,
+    "notification-inline-replies": true,
+    "notification-window-width": 400,
+    "positionX": "right",
+    "positionY": "top",
+    "script-fail-notify": true,
+    "timeout": 8,
+    "timeout-critical": 12,
+    "timeout-low": 7,
+    "transition-time": 200,
+    "widget-config": {
+        "backlight": {
+            "label": "󰃠",
+            "device": "intel_backlight",
+            "subsystem": "backlight",
+            "min": 5
+        },
+        "volume": {
+            "device": "default",
+            "label": "",
+            "slider": true
+        },
+        "dnd": {
+            "text": "Do not disturb"
+        },
+        "mpris": {
+            "image-size": 100,
+            "image-radius": 10,
+            "autohide": false,
+            "blacklist": [
+                "org.mpris.MediaPlayer2.playerctld"
+            ]
+        },
+        "buttons-grid": {
+            "buttons-per-row": 5,
+            "actions": [
+                {
+                    "label": "",
+                    "command": "iwgtk",
+                    "tooltip": "Network"
+                },
+                {
+                    "label": "",
+                    "command": "blueman-manager",
+                    "tooltip": "Bluetooth"
+                },
+                {
+                    "label": "",
+                    "command": "kdeconnect-app",
+                    "tooltip": "KDE connect"
+                },
+                {
+                    "label": "󰛊",
+                    "type": "toggle",
+                    "tooltip": "idle inhibitor",
+                    "command": "bash -c '$HOME/.local/bin/caffeine'",
+                    "update-command": "bash -c '$HOME/.local/bin/caffeine --is-running'"
+                },
+                {
+                    "label": "󰄀",
+                    "type": "button",
+                    "command": "swaync-client -cp && hyprshot -m region",
+                    "tooltip": "Screenshot "
+                }
+            ]
+        }
+    },
+    "widgets": [
+        "mpris",
+        "buttons-grid",
+        "backlight",
+        "volume",
+        "dnd",
+        "notifications"
+    ]
+}

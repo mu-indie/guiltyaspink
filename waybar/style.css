@@ -1,0 +1,403 @@
+/* === VARIABLES === */
+
+/* Base (neutral) */
+@define-color no0 rgba(17, 17, 27, 0.7);
+/* base */
+@define-color no1 rgba(24, 24, 37, 0.65);
+/* mantle */
+@define-color no2 rgba(30, 30, 46, 1.0);
+/* crust */
+
+/* Red */
+@define-color re0 rgba(243, 139, 168, 1.0);
+/* red */
+@define-color re1 rgba(235, 160, 172, 1.0);
+/* maroon-ish darker alt */
+@define-color re2 rgba(203, 166, 247, 1.0);
+/* fallback darker tone */
+
+/* Green */
+@define-color gr0 rgba(166, 227, 161, 1.0);
+/* green */
+@define-color gr1 rgba(148, 226, 213, 1.0);
+/* teal alt */
+@define-color gr2 rgba(108, 112, 134, 1.0);
+/* muted dark */
+
+/* Yellow */
+@define-color ye0 rgba(249, 226, 175, 1.0);
+/* yellow */
+@define-color ye1 rgba(250, 179, 135, 1.0);
+/* peach alt */
+@define-color ye2 rgba(108, 112, 134, 1.0);
+
+/* Blue */
+@define-color bl0 rgba(137, 180, 250, 1.0);
+/* blue */
+@define-color bl1 rgba(116, 199, 236, 1.0);
+/* sapphire */
+@define-color bl2 rgba(108, 112, 134, 1.0);
+
+/* Violet */
+@define-color vi0 rgba(203, 166, 247, 1.0);
+/* mauve */
+@define-color vi1 rgba(180, 190, 254, 1.0);
+/* lavender */
+@define-color vi2 rgba(108, 112, 134, 1.0);
+
+/* Cyan */
+@define-color cy0 rgba(148, 226, 213, 1.0);
+/* teal */
+@define-color cy1 rgba(116, 199, 236, 1.0);
+/* sapphire */
+@define-color cy2 rgba(108, 112, 134, 1.0);
+
+/* White / text */
+@define-color wh0 rgba(205, 214, 244, 1.0);
+/* text */
+@define-color wh1 rgba(186, 194, 222, 1.0);
+/* subtext1 */
+@define-color wh2 rgba(166, 173, 200, 1.0);
+/* subtext0 */
+
+/* Muted / metal */
+@define-color me0 rgba(127, 132, 156, 0.8);
+/* overlay1 */
+@define-color me1 rgba(88, 91, 112, 0.8);
+/* surface2 */
+@define-color me2 rgba(69, 71, 90, 0.8);
+/* surface1 */
+
+/* Orange */
+@define-color or0 rgba(250, 179, 135, 1.0);
+/* peach */
+@define-color or1 rgba(245, 169, 127, 1.0);
+/* softer orange alt */
+@define-color or2 rgba(108, 112, 134, 1.0);
+
+/* Pink */
+@define-color pi0 rgba(245, 194, 231, 1.0);
+/* pink */
+@define-color pi1 rgba(243, 139, 168, 1.0);
+/* red-pink */
+@define-color pi2 rgba(108, 112, 134, 1.0);
+
+
+/* === GLOBAL === */
+
+* {
+	font-family: Departure Mono Nerd Font,"Noto Sans", "Noto Sans CJK JP", "Noto Sans CJK SC";
+	font-size: 15px;
+	letter-spacing: -0.05em;
+	font-weight: 400;
+	min-height: 0;
+}
+
+window#waybar {
+	background: transparent;
+	opacity: 1;
+}
+
+window#waybar.hidden {
+	opacity: 0;
+}
+
+
+/* === MODULE DEFAULTS === */
+
+#custom-now-playing,
+#custom-arch,
+#workspaces,
+#window {
+	background-color: transparent;
+	border: none;
+	border-radius: 0;
+	padding: 0 16px;
+	color: @re0;
+}
+
+
+/* === BUTTON SIZE === */
+
+#custom-notifications,
+#pulseaudio,
+#network,
+#memory,
+#power-profiles-daemon,
+#temperature,
+#battery {
+	padding: 0 16px;
+	min-width: 15px;
+}
+
+
+/* === ARCH LOGO === */
+
+#custom-arch {
+	color: @no2;
+	background-color: @pi0;
+	font-weight: bold;
+	font-size: 18px
+}
+
+#custom-arch:hover {
+	color: @no2;
+	background-color: @vi1;
+}
+
+
+
+/* === WORKSPACES === */
+
+#workspaces {
+	background-color: @no1;
+}
+
+#workspaces button {
+	border-radius: 0;
+	margin: 0;
+	min-width: 30px;
+	font-weight: bolder;
+	color: @bl0;
+	background: transparent;
+}
+
+#workspaces button label {
+	font-size: 21px;
+	padding: 0 10px;
+	color: @pi0;
+
+}
+
+#workspaces button.active label {
+	color: @cy0;
+}
+
+#workspaces button:hover {
+	background-color: @me0;
+}
+
+#workspaces button:hover label {
+	color: @pi0;
+}
+
+#workspaces button.active:hover {
+	background-color: @me0;
+}
+
+#workspaces button.active label {
+	color: @vi1;
+}
+
+#workspaces button.urgent {
+	background-color: @ye0;
+}
+
+#workspaces button.urgent label {
+	color: @ye2;
+}
+
+/* === CLOCKS === */
+
+#clock.time,
+#clock.date {
+	color: @pi0;
+	background-color: @no1;
+	padding: 0 32px;
+}
+
+#clock.time {
+	border-bottom-left-radius: 10px;
+}
+
+#clock.date {
+	border-bottom-right-radius: 10px;
+}
+
+#clock.time:hover,
+#clock.date:hover {
+	color: @vi0;
+	background-color: @no0;
+	border-bottom: 1px solid rgba(180, 190, 254, 0.4);
+	box-shadow: inset 0 -2px 0px 0 rgba(180, 190, 254, 0.8);
+}
+
+
+/* === SYSTEM METRICS === */
+
+#cpu,
+#memory,
+#temperature {
+	color: @pi0;
+	background-color: @no1;
+}
+
+
+#temperature.critical {
+	color: @no2;
+	background-color: @ye0;
+}
+
+#memory:hover,
+#temperature:hover,
+#temperature.critical:hover {
+	color: @vi0;
+	background-color: @no0;
+	border-bottom: 1px solid rgba(180, 190, 254, 0.4);
+	box-shadow: inset 0 -2px 0px 0 rgba(180, 190, 254, 0.8);
+}
+
+
+/* === NETWORK, AUDIO & BATTERY=== */
+
+#network {
+	background-color: @no1;
+	color: @pi0;
+	border-bottom-left-radius: 10px;
+}
+
+#network.disconnected {
+	color: @re1;
+	background-color: @no1;
+	border-bottom-left-radius: 10px;
+	border-bottom: 1px solid rgba(245, 194, 231, 0.4);
+	box-shadow: inset 0 -2px 1px 0 rgba(245, 194, 231, 1.3);
+}
+
+#network.linked {
+	color: @pi0;
+	background-color: @no1;
+	border-bottom-left-radius: 10px;
+}
+
+#pulseaudio {
+	color: @pi0;
+	background-color: @no1;
+}
+
+#pulseaudio.muted {
+	color: @re1;
+	border-bottom: 1px solid rgba(245, 194, 231, 0.4);
+	box-shadow: inset 0 -2px 1px 0 rgba(245, 194, 231, 1.3);
+
+}
+
+#battery {
+	background-color: @no1;
+	color: @pi0;
+}
+
+#network.disconnected:hover {
+
+	color: @re0;
+	background-color: @no1;
+	border-bottom: 1px solid rgba(243, 139, 168, 0.4);
+	box-shadow: inset 0 -2px 1px 0 rgba(243, 139, 168, 0.8);
+
+}
+
+#network:hover,
+#pulseaudio:hover,
+#battery:hover {
+	color: @vi0;
+	background-color: @no0;
+	border-bottom: 1px solid rgba(180, 190, 254, 0.4);
+	box-shadow: inset 0 -2px 0px 0 rgba(180, 190, 254, 0.8);
+}
+
+#pulseaudio.muted:hover {
+	color: @re0;
+	background-color: @no1;
+	border-bottom: 1px solid rgba(243, 139, 168, 0.4);
+	box-shadow: inset 0 -2px 1px 0 rgba(243, 139, 168, 0.8);
+}
+
+
+/* === MUSIC === */
+
+#custom-now-playing {
+	background-color: transparent;
+	color: @wh10;
+	padding: 0 32px;
+	border-bottom: 1px solid rgba(245, 194, 231, 0.4);
+	box-shadow: inset 0 -2px 2px 0 rgba(245, 194, 231, 0.6);
+}
+
+#custom-now-playing:hover {
+	color: @wh10;
+	background-color: transparent;
+	border-bottom: 1px solid rgba(245, 194, 231, 0.4);
+	box-shadow: inset 0 -2px 2px 0 rgba(245, 194, 231, 1.0);
+
+}
+
+
+/* === NOTIFICATIONS === */
+
+#custom-notifications {
+	background-color: @no1;
+	color: @pi0;
+	font-size: 20px;
+
+}
+
+#custom-notifications:hover {
+	color: @vi0;
+	background-color: @no0;
+	border-bottom: 1px solid rgba(180, 190, 254, 0.4);
+	box-shadow: inset 0 -2px 0px 0 rgba(180, 190, 254, 1.0);
+}
+
+#custom-notifications.dnd-none {
+	color: @pi0;
+}
+
+#custom-notifications.dnd-none:hover {
+	color: @vi0;
+	background-color: @no0;
+	border-bottom: 1px solid rgba(180, 190, 254, 0.4);
+	box-shadow: inset 0 -2px 0px 0 rgba(180, 190, 254, 0.8);
+}
+
+#tray {
+	background-color: @no1;
+}
+
+#power-profiles-daemon {
+	background-color: @no1;
+	padding-left: 5px;
+	padding-right: 15px;
+	border-bottom-right-radius: 10px;
+}
+
+#power-profiles-daemon.performance {
+	background-color: @no1;
+	color: @re0;
+
+}
+
+#power-profiles-daemon.balanced {
+	background-color: @no1;
+	color: @vi0;
+}
+
+#power-profiles-daemon.power-saver {
+	background-color: @no1;
+	color: @gr0;
+}
+
+#power-profiles-daemon:hover {
+	color: @vi0;
+	background-color: @no0;
+	border-bottom: 1px solid rgba(180, 190, 254, 0.4);
+	box-shadow: inset 0 -2px 0px 0 rgba(180, 190, 254, 0.8);
+}
+
+/* === WINDOW === */
+
+#window {
+	color: @no0;
+	background-color: @re0;
+	padding: 0 32px;
+	border: none;
+}

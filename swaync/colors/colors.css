@@ -1,0 +1,11 @@
+@define-color center-bg       rgba(30, 30, 46, 0.9);  /* base */
+@define-color background      #1e1e2e;  /* base */
+@define-color background-alt  #181825;  /* mantle */
+
+@define-color text            #FFFAFD;  /* text */
+@define-color text-alt        #a6adc8;  /* subtext0 */
+
+@define-color selected        alpha(#E480C9, .4);  
+@define-color hover           alpha(#F5C2E7, .9);  /* pink */
+
+@define-color urgent          #f38ba8;  /* red */
