@@ -44,11 +44,13 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("hyprsunset")
 	hl.exec_cmd("hypridle")
 	hl.exec_cmd("swaync")
+	hl.exec_cmd("/usr/local/bin/iio-hyprland")
 	hl.exec_cmd("iio-hyprland")
 	hl.exec_cmd("kdeconnectd")
 	hl.exec_cmd("powernotd")
 	hl.exec_cmd("wl-paste --type text --watch cliphist store")
 	hl.exec_cmd("wl-paste --type image --watch cliphist store")
+	hl.exec_cmd("hyprctl setcursor catppuccin-mocha-lavender-cursors 24")
 end)
 
 -------------------------------
@@ -89,7 +91,7 @@ hl.config({
 		gaps_in = 5,
 		gaps_out = 10,
 
-		border_size = 3,
+		border_size = 0,
 
 		col = {
 			active_border = { colors = { "rgba(ea76cbee)", "rgba(209fb5ee)" }, angle = 45 },
@@ -102,9 +104,8 @@ hl.config({
 		-- Please see https://wiki.hypr.land/Configuring/Advanced-and-Cool/Tearing/ before you turn this on
 		allow_tearing = true,
 
-		layout = "dwindle",
+		layout = "scrolling",
 	},
-
 	decoration = {
 		rounding = 10,
 		rounding_power = 2,
@@ -115,9 +116,11 @@ hl.config({
 
 		shadow = {
 			enabled = true,
-			range = 4,
-			render_power = 3,
-			color = 0xee1a1a1a,
+			range = 7,
+			render_power = 4,
+			color = "rgba(a434aaee)",
+			color_inactive= "rgba(595959aa)",
+			scale = 1
 		},
 
 		blur = {
@@ -126,12 +129,22 @@ hl.config({
 			passes = 4,
 			vibrancy = 0.1696,
 		},
+
+		glow = {
+		    enabled = falsw,
+			range = 5,
+			render_power = 1,
+			color = "rgba(ea76cbee)",
+		}
+
+	--
 	},
 
 	animations = {
 		enabled = true,
 	},
 })
+
 
 -- Default curves and animations, see https://wiki.hypr.land/Configuring/Advanced-and-Cool/Animations/
 hl.curve("easeOutQuint", { type = "bezier", points = { { 0.23, 1 }, { 0.32, 1 } } })
@@ -197,6 +210,7 @@ hl.config({
 hl.config({
 	scrolling = {
 		fullscreen_on_one_column = true,
+		column_width = 0.5,
 	},
 })
 
@@ -234,10 +248,12 @@ hl.config({
 })
 
 hl.gesture({
-	fingers = 3,
+	fingers = 4,
 	direction = "horizontal",
 	action = "workspace",
 })
+
+hl.gesture({ fingers = 3, direction = "horizontal", action = "scroll_move" })
 
 -- Example per-device config
 -- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Devices/ for more
@@ -270,12 +286,29 @@ hl.bind(
 	)
 )
 hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit")) -- dwindle only
-hl.bind(mainMod .. " + period", hl.dsp.exec_cmd("hypremoji"))
+hl.bind("SHIFT+ f2", hl.dsp.exec_cmd("hypremoji"))
+hl.bind("SUPER + F", hl.dsp.window.fullscreen({ mode = "maximized", action = "toggle" }))
+
+--screennshot binds
+hl.bind("SHIFT + f12", hl.dsp.exec_cmd("hyprshot -m region"))
+hl.bind("ALT + f12", hl.dsp.exec_cmd("hyprshot -m output"))
+hl.bind("CTRL + f12", hl.dsp.exec_cmd("hyprshot -m window"))
+
 -- Move focus with mainMod + arrow keys
 hl.bind(mainMod .. " + left", hl.dsp.focus({ direction = "left" }))
 hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))
 hl.bind(mainMod .. " + up", hl.dsp.focus({ direction = "up" }))
 hl.bind(mainMod .. " + down", hl.dsp.focus({ direction = "down" }))
+
+-- Move focus with mainMod + [ & ] keys
+hl.bind(mainMod .. " + bracketright", hl.dsp.focus({ direction = "right" }))
+hl.bind(mainMod .. " + bracketleft", hl.dsp.focus({ direction = "left" }))
+
+-- Move window with mainMod + arrow keys
+hl.bind(mainMod .. " + SHIFT + left", hl.dsp.window.move({ direction = "left" }))
+hl.bind(mainMod .. " + SHIFT + right", hl.dsp.window.move({ direction = "right" }))
+hl.bind(mainMod .. " + SHIFT + up", hl.dsp.window.move({ direction = "up" }))
+hl.bind(mainMod .. " + SHIFT + down", hl.dsp.window.move({ direction = "down" }))
 
 -- Switch workspaces with mainMod + [0-9]
 -- Move active window to a workspace with mainMod + SHIFT + [0-9]

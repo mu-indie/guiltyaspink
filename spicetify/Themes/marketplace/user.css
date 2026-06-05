@@ -1,0 +1,7 @@
+*,
+.encore-text,
+.TypeElement,
+[class*="Type__"],
+[class*="encore-text"] {
+  font-family: 'DepartureMono Nerd Font', monospace !important;
+}
