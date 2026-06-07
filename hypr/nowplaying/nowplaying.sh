@@ -1,6 +1,7 @@
 #!/bin/bash
 
 THUMB=/tmp/hyde-mpris
+fallback_art_file="$HOME/.config/hypr/nowplaying/fallback_album_art.jpg"
 THUMB_BLURRED=/tmp/hyde-mpris-blurred
 
 escape() { echo "$1" | sed 's/&/\&amp;/g; s/</\&lt;/g; s/>/\&gt;/g'; }
@@ -19,25 +20,40 @@ while IFS= read -r p; do
   [ $cur -gt $priority ] && active_player="$p" && priority=$cur
 done <<< "$(playerctl -l 2>/dev/null)"
 
-if [ -z "$active_player" ]; then exit 0; fi
+#clear album art when no media is playing
+if [ -z "$active_player" ]; then
+  rm -f "${THUMB}.png" "${THUMB}.inf"
+  pkill -USR2 hyprlock 2>/dev/null
+  exit 0
+fi
 
+#get metadata(artist and song title)
 raw_title=$(playerctl -p "$active_player" metadata title 2>/dev/null)
 raw_artist=$(playerctl -p "$active_player" metadata artist 2>/dev/null)
 
+#display album art
 fetch_thumb() {
   artUrl=$(playerctl -p "$active_player" metadata mpris:artUrl 2>/dev/null)
-  [ -z "$artUrl" ] && return 1
+  tmp="${THUMB}.tmp.png"
+  
+  # display fallback art if no art is found
+  if [ -z "$artUrl" ]; then
+    cp "$fallback_art_file" "${THUMB}.png"
+    pkill -USR2 hyprlock 2>/dev/null
+    return 0
+  fi
 
   # Skip if art hasn't changed
   [[ "$artUrl" = "$(cat "${THUMB}.inf" 2>/dev/null)" ]] && return 0
   printf "%s\n" "$artUrl" > "${THUMB}.inf"
 
-  tmp="${THUMB}.tmp.png"
-
-  if   [[ "$artUrl" =~ ^https?:// ]]; then curl -so "$tmp" "$artUrl"
-  elif [[ "$artUrl" =~ ^file:// ]];   then cp "$(url_decode "${artUrl#file://}")" "$tmp"
+  if   [[ "$artUrl" =~ ^https?:// ]];  then curl -so "$tmp" "$artUrl"
+  elif [[ "$artUrl" =~ ^file:// ]];    then cp "$(url_decode "${artUrl#file://}")" "$tmp"
   elif [[ "$artUrl" =~ ^data:image ]]; then echo "${artUrl#*,}" | base64 -d > "$tmp"
-  else return 1
+  else
+    cp "$fallback_art_file" "${THUMB}.png"
+    pkill -USR2 hyprlock 2>/dev/null
+    return 0
   fi
 
   magick "$tmp" -quality 50 "${THUMB}.png"
@@ -45,8 +61,7 @@ fetch_thumb() {
   rm -f "$tmp"
   pkill -USR2 hyprlock 2>/dev/null
 }
-
-{ fetch_thumb; } || { rm -f "${THUMB}.png" "${THUMB}.inf"; } &
+{ fetch_thumb; } || { cp "$fallback_art_file" "${THUMB}.png"; pkill -USR2 hyprlock 2>/dev/null; } &
 
 case "$1" in
   --title)
