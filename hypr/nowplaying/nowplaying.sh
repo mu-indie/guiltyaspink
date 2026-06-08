@@ -5,6 +5,7 @@ fallback_art_file="$HOME/.config/hypr/nowplaying/fallback_album_art.jpg"
 THUMB_BLURRED=/tmp/hyde-mpris-blurred
 
 escape() { echo "$1" | sed 's/&/\&amp;/g; s/</\&lt;/g; s/>/\&gt;/g'; }
+url_decode() { python3 -c "import urllib.parse,sys; print(urllib.parse.unquote(sys.argv[1]))" "$1"; }
 
 # Pick highest-priority active player
 active_player=""
