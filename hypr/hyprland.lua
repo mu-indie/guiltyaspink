@@ -136,10 +136,7 @@ hl.config({
 			render_power = 1,
 			color = "rgba(ea76cbee)",
 		}
-
-	--
 	},
-
 	animations = {
 		enabled = true,
 	},
@@ -243,6 +240,7 @@ hl.config({
 
 		touchpad = {
 			natural_scroll = true,
+			disable_while_typing = true
 		},
 	},
 })
@@ -253,7 +251,11 @@ hl.gesture({
 	action = "workspace",
 })
 
-hl.gesture({ fingers = 3, direction = "horizontal", action = "scroll_move" })
+hl.gesture({ 
+	fingers = 3,
+	direction = "horizontal",
+	action = "scroll_move"
+ })
 
 -- Example per-device config
 -- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Devices/ for more
@@ -303,6 +305,12 @@ hl.bind(mainMod .. " + down", hl.dsp.focus({ direction = "down" }))
 -- Move focus with mainMod + [ & ] keys
 hl.bind(mainMod .. " + bracketright", hl.dsp.focus({ direction = "right" }))
 hl.bind(mainMod .. " + bracketleft", hl.dsp.focus({ direction = "left" }))
+
+-- Move windows with mainMod + bracket keys
+hl.bind(mainMod .. " + SHIFT + bracketleft", hl.dsp.window.move({ direction = "left" }))
+hl.bind(mainMod .. " + SHIFT + bracketright", hl.dsp.window.move({ direction = "right" }))
+
+
 
 -- Move window with mainMod + arrow keys
 hl.bind(mainMod .. " + SHIFT + left", hl.dsp.window.move({ direction = "left" }))
