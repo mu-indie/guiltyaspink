@@ -1,11 +1,11 @@
 /* === VARIABLES === */
 
 /* Base (neutral) */
-@define-color no0 rgba(17, 17, 27, 0.7);
+@define-color no0 rgba(17, 17, 27, 1.0);
 /* base */
-@define-color no1 rgba(24, 24, 37, 0.65);
+@define-color no1 rgba(30, 30, 46, 1.0);
 /* mantle */
-@define-color no2 rgba(30, 30, 46, 1.0);
+@define-color no2 rgba(24, 24, 37, 1.0);
 /* crust */
 
 /* Red */

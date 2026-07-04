@@ -132,11 +132,11 @@
     "pulseaudio": {
       "reverse-scrolling": true,
       // "scroll-step": 1, // %, can be a float
-      "format": "{volume}% {icon} {format_source}",
-      "format-bluetooth": "{volume}% {icon}  {format_source}",
-      "format-bluetooth-muted": "{icon}  {format_source}",
-      "format-muted": "{volume}% 󰝟 {format_source}",
-      "format-source": "{volume}%⦁",
+      "format": "{icon} ⦁ {format_source}",
+      "format-bluetooth": "{icon}  ⦁ {format_source}",
+      "format-bluetooth-muted": "{icon}  ⦁ {format_source}",
+      "format-muted": "󰝟 ⦁ {format_source}",
+      "format-source": "",
       "format-source-muted": "",
       "format-icons": {
         "headphone": "",
@@ -153,10 +153,6 @@
     "tray": {
       "icon-size": 18,
       "spacing": 10,
-      "icons": {
-        "blueman": "bluetooth",
-        "TelegramDesktop": "$HOME/.local/share/icons/hicolor/16x16/apps/telegram.png",
-      },
     },
     /// MEDIA PLAYERS (TEST) ///
     "custom/now-playing": {
