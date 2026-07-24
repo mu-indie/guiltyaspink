@@ -315,7 +315,7 @@ hl.bind(
 hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit")) -- dwindle only
 hl.bind(mainMod .. " + period",
     hl.dsp.exec_cmd(
-        [[rofimoji  --action clipboard --selector-args="-theme .local/share/rofi/themes/rounded-nord-dark.rasi"]]))
+    [[rofimoji  --action clipboard --selector-args="-theme .local/share/rofi/themes/rounded-nord-dark.rasi"]]))
 hl.bind(mainMod .. "+ F", hl.dsp.window.fullscreen({ mode = "maximized", action = "toggle" }))
 hl.bind(mainMod .. " +G", hl.dsp.window.resize({ x = 935, y = 950 }))
 
